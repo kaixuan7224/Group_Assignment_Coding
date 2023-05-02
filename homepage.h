@@ -110,7 +110,7 @@ void exit()
 {
 }
 
-Customer *login(DoublyLinkedList<Customer> &customerlist)
+Customer* login(DoublyLinkedList<Customer> &customerlist)
 {
     string name, password;
     cout << "User:";

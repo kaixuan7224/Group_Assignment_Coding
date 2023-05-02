@@ -5,21 +5,9 @@
 #include "guessUser.h"
 #include "admin.h"
 #include "customerMenu.h"
+using namespace std;
 
-void generateDummyData(DoublyLinkedList<Customer> &customerlist)
-{
-    string names[] = {"Alice", "Bob", "Charlie", "David", "Emily"};
-    string genders[] = {"Female", "Male", "Female", "Male", "Female"};
-    string passwords[] = {"password1", "password2", "password3", "password4", "password5"};
-    string phoneNos[] = {"012-345-6789", "015-678-9842", "018-453-5642", "019-456-3457", "011-245-5674"};
 
-    for (int i = 0; i < 5; i++)
-    {
-        Customer cus(names[i], passwords[i], phoneNos[i], genders[i]);
-        customerlist.insertAtEnd(cus);
-        
-    }
-}
 
 int main()
 {
@@ -27,9 +15,60 @@ int main()
     DynamicArrayCollection<UniversityNode2> universitiesList2 = readFromFileArray("2023_QS_World_University_Rankings.csv");
     DoublyLinkedList<Customer> customerlist;
     //mergeSort(universitiesList2,sortByInstitutionAsc);
-    //universitiesList2.display();
-    
-    // generateDummyData(customerlist);
+    universitiesList2.display();
+    //generateDummyData(customerlist);
     // customerlist.displayForward();
-     homepage(customerlist);
+    //homepage(customerlist);
+    int selection;
+    do{
+    
+    drawLine(20, "Homempage");
+    cout << "1. Guess User" << endl;
+    cout << "2. Login" << endl;
+    cout << "3. Register" << endl;
+    cout << "4. Exit" << endl;
+    cout << "Enter selection :";
+    cin >> selection;
+    if (cin.fail()){
+        cout << "Please enter valid input!" << endl;
+        cin.clear();
+        //cin.ignore();
+        continue;
+    }
+    switch (selection)
+    {
+    case 1:
+        guess_User_Menu();
+        break;
+    case 2:
+    {
+        Customer *loggedInUser = login(customerlist);
+        if (loggedInUser != NULL)
+        {
+            // user successfully logged in
+            cout << "Welcome " << loggedInUser->name << "!" << endl;
+            customerMenu();
+        }
+        else
+        {
+            // login failed
+            cout << "Login failed. Please check your username and password." << endl;
+        }
+        break;
+    }
+    case 3:
+        register_Cus(customerlist);
+        break;
+    case 4:
+        exit(0);
+        break;
+    default:
+        cout << "Invalid input , try again!" << endl;
+        break;
+    }
+    }while(selection !=4);
+
+    cout << "Thanks for using my system";
 }
+
+    
