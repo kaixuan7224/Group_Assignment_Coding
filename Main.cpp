@@ -17,7 +17,7 @@ void generateDummyData(DoublyLinkedList<Customer> &customerlist)
     {
         Customer cus(names[i], passwords[i], phoneNos[i], genders[i]);
         customerlist.insertAtEnd(cus);
-        // 123456
+        
     }
 }
 
